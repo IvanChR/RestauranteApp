@@ -3,8 +3,10 @@ package com.example.restaurantapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
@@ -31,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
+    }
+
+    public void onGoToRestauranteA(View view){
+        Intent intent = new Intent(this, RestauranteA.class);
+        startActivity(intent);
     }
 
 
