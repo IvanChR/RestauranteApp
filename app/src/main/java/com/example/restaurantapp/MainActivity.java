@@ -2,41 +2,51 @@ package com.example.restaurantapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.content.Intent;
+import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
-    private ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = (ListView)findViewById(R.id.listView);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
 
-        String items[] = new String[4];
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
 
-        items[0] = "Restaurante A";
-        items[1] = "Restaurante B";
-        items[2] = "Restaurante C";
-        items[3] = "Restaurante D";
-
-  /*      for(int i = 0; i<items.length; i++){
-            items[i] = "item " + (i + 1);
-        }
-*/
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
-
-        listView.setAdapter(adapter);
-
+            getMenuInflater().inflate(R.menu.menu, menu);
+            return true;
     }
 
     public void onGoToRestauranteA(View view){
         Intent intent = new Intent(this, RestauranteA.class);
+        startActivity(intent);
+    }
+    public void onGoToRestauranteB(View view){
+        Intent intent = new Intent(this, RestauranteB.class);
+        startActivity(intent);
+    }
+
+    public void onGoToRestauranteC(View view){
+        Intent intent = new Intent(this, RestauranteA.class);
+        startActivity(intent);
+    }
+    public void onGoToRestauranteD(View view){
+        Intent intent = new Intent(this, RestauranteB.class);
         startActivity(intent);
     }
 

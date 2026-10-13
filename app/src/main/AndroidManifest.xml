@@ -20,6 +20,19 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RestauranteA"
+            android:exported="false" />
+        <activity
+            android:name=".RestauranteB"
+            android:exported="false" />
+        <activity
+            android:name=".RestauranteC"
+            android:exported="false" />
+        <activity
+            android:name=".RestauranteD"
+            android:exported="false" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
