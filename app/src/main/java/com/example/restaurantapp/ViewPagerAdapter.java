@@ -29,7 +29,7 @@ public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
 
     @Override
     public int getCount(){
-        return behavior;
+        return 3;
     }
 }
 

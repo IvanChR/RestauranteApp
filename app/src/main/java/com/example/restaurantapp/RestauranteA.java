@@ -31,8 +31,8 @@ public class RestauranteA extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
         tabComida = (TabItem) findViewById(R.id.tabComida);
-        tabComida = (TabItem) findViewById(R.id.tabBebidas);
-        tabComida = (TabItem) findViewById(R.id.tabComplementos);
+        tabBebida = (TabItem) findViewById(R.id.tabBebidas);
+        tabComplementos = (TabItem) findViewById(R.id.tabComplementos);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(viewPagerAdapter);
@@ -41,22 +41,13 @@ public class RestauranteA extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-
-                if (tab.getPosition() == (0 | 1 | 2)) {
-                    viewPagerAdapter.notifyDataSetChanged();
-                }
-
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabUnselected(TabLayout.Tab tab) {}
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabReselected(TabLayout.Tab tab) {}
 
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
