@@ -34,7 +34,7 @@ public class RestauranteA extends AppCompatActivity {
         tabBebida = (TabItem) findViewById(R.id.tabBebidas);
         tabComplementos = (TabItem) findViewById(R.id.tabComplementos);
 
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

@@ -42,13 +42,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onGoToRestauranteC(View view){
-        Intent intent = new Intent(this, RestauranteA.class);
+        Intent intent = new Intent(this, RestauranteC.class);
         startActivity(intent);
     }
-    public void onGoToRestauranteD(View view){
-        Intent intent = new Intent(this, RestauranteB.class);
-        startActivity(intent);
-    }
+
 
 
 }

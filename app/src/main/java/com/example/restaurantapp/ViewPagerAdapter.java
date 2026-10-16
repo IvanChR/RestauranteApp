@@ -6,11 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-int behavior;
-public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
-    super(fm, behavior);
+public ViewPagerAdapter(@NonNull FragmentManager fm) {
+    super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
-    this.behavior = behavior;
 }
     @NonNull
     @Override
@@ -23,7 +21,7 @@ public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
             case 2:
                 return new TabComplementos();
             default:
-                return null;
+                return new TabComida();
         }
     }
 
