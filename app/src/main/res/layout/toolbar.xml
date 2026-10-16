@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:background="#7f03fc"
-    app:title="Restaurantes"
+    app:title="@string/mainActivityTitle"
     app:titleTextColor="#fff"
     >
 

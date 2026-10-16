@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="15dp">
+        android:paddingStart="15dp">
 
         <ImageView
             android:id="@+id/imageDetail"
@@ -32,14 +32,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="15dp">
+            android:paddingStart="15dp">
 
             <TextView
                 android:id="@+id/precioComida"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$ 99.00"
-                android:textSize="21dp"/>
+                android:textSize="21sp"/>
 
             <TextView
                 android:id="@+id/nombreComida"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Comida Detalle"
-                android:textSize="24dp"/>
+                android:textSize="24sp"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -56,20 +56,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
         android:paddingTop="15dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción: "
-            android:textSize="24dp"
+            android:text="@string/descripcion"
+            android:textSize="24sp"
             android:layout_marginBottom="10dp"
             />
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id velit enim. Etiam non convallis elit. Proin finibus mi vitae tortor lacinia aliquam. Sed interdum nec nisl id lacinia. Vestibulum id libero sed massa pharetra viverra. Mauris pellentesque eros turpis, quis eleifend orci tincidunt a. " />
+            android:text="@string/lorem_text" />
 
     </LinearLayout>
 

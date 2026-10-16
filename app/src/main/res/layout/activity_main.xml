@@ -22,7 +22,7 @@
         android:layout_marginTop="72dp"
         android:clickable="true"
         android:onClick="onGoToRestauranteA"
-        android:text="Restaurante A"
+        android:text="@string/restaurante_a_title"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
         android:layout_marginTop="120dp"
         android:clickable="true"
         android:onClick="onGoToRestauranteB"
-        android:text="Restaurante B"
+        android:text="@string/restaurante_b_title"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +48,7 @@
         android:layout_marginTop="168dp"
         android:clickable="true"
         android:onClick="onGoToRestauranteC"
-        android:text="Restaurante C"
+        android:text="@string/restaurante_c_title"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

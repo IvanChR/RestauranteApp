@@ -13,7 +13,7 @@
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:background="#00FFFFFF"
         android:src="@drawable/ic_back_white" />
         <!--android:onClick="onBackPressed()"-->
@@ -21,8 +21,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comida A"
+        android:text="@string/comida_a"
         android:textColor="#fff"
-        android:textSize="24dp"/>
+        android:textSize="24sp"/>
 
 </androidx.appcompat.widget.Toolbar>

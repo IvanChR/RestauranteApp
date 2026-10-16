@@ -9,18 +9,18 @@
         android:id="@+id/tabComida"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="Comidas"
+        android:text="@string/tab_comidas"
         />
     <com.google.android.material.tabs.TabItem
         android:id="@+id/tabBebidas"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="Bebidas"
+        android:text="@string/tab_bebidas"
         />
     <com.google.android.material.tabs.TabItem
         android:id="@+id/tabComplementos"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="Complementos"
+        android:text="@string/tab_complementos"
         />
 </com.google.android.material.tabs.TabLayout>

@@ -31,15 +31,15 @@ public class TabComida extends Fragment {
         TextView textoComidaC = view.findViewById(R.id.textViewComidaC);
 
         if (textoComidaA != null) {
-            textoComidaA.setOnClickListener(v -> abrirDetalle(R.layout.comida_a));
+            textoComidaA.setOnClickListener(v -> abrirDetalle(R.layout.restaurante_a_comida_a));
         }
 
         if (textoComidaB != null) {
-            textoComidaB.setOnClickListener(v -> abrirDetalle(R.layout.comida_b));
+            textoComidaB.setOnClickListener(v -> abrirDetalle(R.layout.restaurante_a_comida_b));
         }
 
         if (textoComidaC != null) {
-            textoComidaC.setOnClickListener(v -> abrirDetalle(R.layout.comida_c));
+            textoComidaC.setOnClickListener(v -> abrirDetalle(R.layout.restaurante_a_comida_c));
         }
 
         return view;

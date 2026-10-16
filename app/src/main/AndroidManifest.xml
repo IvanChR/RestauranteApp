@@ -29,9 +29,6 @@
         <activity
             android:name=".RestauranteC"
             android:exported="false" />
-        <activity
-            android:name=".RestauranteD"
-            android:exported="false" />
 
         <activity android:name=".ComidaDetalle"
             android:exported="false" />

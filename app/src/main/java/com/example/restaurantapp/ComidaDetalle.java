@@ -10,7 +10,7 @@ public class ComidaDetalle extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int layoutId = getIntent().getIntExtra("LAYOUT_ID", R.layout.comida_a);
+        int layoutId = getIntent().getIntExtra("LAYOUT_ID", R.layout.restaurante_a_comida_a);
         setContentView(layoutId);
     }
 }
