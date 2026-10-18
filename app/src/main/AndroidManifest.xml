@@ -33,6 +33,15 @@
         <activity android:name=".ComidaDetalle"
             android:exported="false" />
 
+        <activity android:name=".AddRestaurantActivity"
+            android:exported="false" />
+        <activity android:name=".EditRestaurantActivity"
+            android:exported="false" />
+        <activity android:name=".AddComidaActivity"
+            android:exported="false" />
+        <activity android:name=".EditComidaActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

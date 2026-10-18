@@ -1,6 +1,7 @@
 package com.example.restaurantapp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,11 +9,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TabComida extends Fragment implements SearchableFragment {
 
-    private TextView tvA, tvB, tvC;
+    private LinearLayout listContainer;
+    private RestaurantDBHelper dbHelper;
+    private long restId = 1;
 
     public TabComida() {
         // Required empty public constructor
@@ -26,96 +32,122 @@ public class TabComida extends Fragment implements SearchableFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_comida, container, false);
+        listContainer = view.findViewById(R.id.tab_list_container);
+        dbHelper = new RestaurantDBHelper(requireContext());
 
-        tvA = view.findViewById(R.id.textViewComidaA);
-        tvB = view.findViewById(R.id.textViewComidaB);
-        tvC = view.findViewById(R.id.textViewComidaC);
-
-        int strA, strB, strC;
-
-        if (getActivity() instanceof RestauranteB) {
-            strA = R.string.restaurante_b_comida_a;
-            strB = R.string.restaurante_b_comida_b;
-            strC = R.string.restaurante_b_comida_c;
-        } else if (getActivity() instanceof RestauranteC) {
-            strA = R.string.restaurante_c_comida_a;
-            strB = R.string.restaurante_c_comida_b;
-            strC = R.string.restaurante_c_comida_c;
-        } else {
-            strA = R.string.restaurante_a_comida_a;
-            strB = R.string.restaurante_a_comida_b;
-            strC = R.string.restaurante_a_comida_c;
-        }
-
-        if (tvA != null) {
-            tvA.setText(getString(strA));
-            tvA.setOnClickListener(v -> abrirDetalle("a", getString(strA)));
-        }
-
-        if (tvB != null) {
-            tvB.setText(getString(strB));
-            tvB.setOnClickListener(v -> abrirDetalle("b", getString(strB)));
-        }
-
-        if (tvC != null) {
-            tvC.setText(getString(strC));
-            tvC.setOnClickListener(v -> abrirDetalle("c", getString(strC)));
+        if (getActivity() != null && getActivity().getIntent() != null) {
+            restId = getActivity().getIntent().getLongExtra("REST_ID", 1);
         }
 
         return view;
     }
 
     @Override
-    public void filtrar(String query) {
-        String q = query == null ? "" : query.toLowerCase().trim();
-        if (tvA != null) tvA.setVisibility(tvA.getText().toString().toLowerCase().contains(q) ? View.VISIBLE : View.GONE);
-        if (tvB != null) tvB.setVisibility(tvB.getText().toString().toLowerCase().contains(q) ? View.VISIBLE : View.GONE);
-        if (tvC != null) tvC.setVisibility(tvC.getText().toString().toLowerCase().contains(q) ? View.VISIBLE : View.GONE);
+    public void onResume() {
+        super.onResume();
+        loadItems();
     }
 
-    private void abrirDetalle(String opcion, String titulo) {
-        int layoutId;
+    private void loadItems() {
+        if (listContainer == null || dbHelper == null) return;
+        listContainer.removeAllViews();
 
+        Cursor cursor = dbHelper.getFoodsByRestAndType(restId, "comida");
+        if (cursor != null && cursor.moveToFirst()) {
+            int idCol = cursor.getColumnIndex(RestContract.FoodEntry._ID);
+            int nameCol = cursor.getColumnIndex(RestContract.FoodEntry.COLUMN_NAME);
+            int priceCol = cursor.getColumnIndex(RestContract.FoodEntry.COLUMN_PRICE);
+            int descCol = cursor.getColumnIndex(RestContract.FoodEntry.COLUMN_DESCRIPTION);
+            int typeCol = cursor.getColumnIndex(RestContract.FoodEntry.COLUMN_TYPE);
+
+            do {
+                final long foodId = cursor.getLong(idCol);
+                final String name = cursor.getString(nameCol);
+                final String price = cursor.getString(priceCol);
+                final String desc = cursor.getString(descCol);
+                final String type = cursor.getString(typeCol);
+
+                TextView tv = new TextView(requireContext());
+                tv.setText(name);
+                tv.setTextSize(24);
+                tv.setPadding(24, 24, 24, 24);
+
+                tv.setOnClickListener(v -> abrirDetalle(foodId, name));
+
+                tv.setOnLongClickListener(v -> {
+                    mostrarMenuContextual(v, foodId, name, price, desc, type);
+                    return true;
+                });
+
+                listContainer.addView(tv);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+    }
+
+    private void mostrarMenuContextual(View anchor, long foodId, String name, String price, String desc, String type) {
+        PopupMenu popup = new PopupMenu(requireContext(), anchor);
+        popup.getMenu().add("Añadir comida");
+        popup.getMenu().add("Editar comida");
+        popup.getMenu().add("Eliminar");
+
+        popup.setOnMenuItemClickListener(item -> {
+            String title = item.getTitle() != null ? item.getTitle().toString() : "";
+            if ("Añadir comida".equals(title)) {
+                Intent intent = new Intent(requireContext(), AddComidaActivity.class);
+                intent.putExtra("REST_ID", restId);
+                intent.putExtra("TYPE", "comida");
+                startActivity(intent);
+            } else if ("Editar comida".equals(title)) {
+                Intent intent = new Intent(requireContext(), EditComidaActivity.class);
+                intent.putExtra("FOOD_ID", foodId);
+                intent.putExtra("FOOD_NAME", name);
+                intent.putExtra("FOOD_PRICE", price);
+                intent.putExtra("FOOD_DESC", desc);
+                intent.putExtra("FOOD_TYPE", type);
+                startActivity(intent);
+            } else if ("Eliminar".equals(title)) {
+                int count = dbHelper.deleteFood(foodId);
+                if (count > 0) {
+                    Toast.makeText(requireContext(), "Comida eliminada con éxito", Toast.LENGTH_SHORT).show();
+                    loadItems();
+                } else {
+                    Toast.makeText(requireContext(), "Error al eliminar comida", Toast.LENGTH_SHORT).show();
+                }
+            }
+            return true;
+        });
+
+        popup.show();
+    }
+
+    @Override
+    public void filtrar(String query) {
+        if (listContainer == null) return;
+        String q = query == null ? "" : query.toLowerCase().trim();
+        for (int i = 0; i < listContainer.getChildCount(); i++) {
+            View child = listContainer.getChildAt(i);
+            if (child instanceof TextView) {
+                TextView tv = (TextView) child;
+                boolean match = tv.getText().toString().toLowerCase().contains(q);
+                tv.setVisibility(match ? View.VISIBLE : View.GONE);
+            }
+        }
+    }
+
+    private void abrirDetalle(long foodId, String titulo) {
+        int layoutId;
         if (getActivity() instanceof RestauranteB) {
-            switch (opcion) {
-                case "b":
-                    layoutId = R.layout.restaurante_b_comida_b;
-                    break;
-                case "c":
-                    layoutId = R.layout.restaurante_b_comida_c;
-                    break;
-                default:
-                    layoutId = R.layout.restaurante_b_comida_a;
-                    break;
-            }
+            layoutId = R.layout.restaurante_b_comida_a;
         } else if (getActivity() instanceof RestauranteC) {
-            switch (opcion) {
-                case "b":
-                    layoutId = R.layout.restaurante_c_comida_b;
-                    break;
-                case "c":
-                    layoutId = R.layout.restaurante_c_comida_c;
-                    break;
-                default:
-                    layoutId = R.layout.restaurante_c_comida_a;
-                    break;
-            }
+            layoutId = R.layout.restaurante_c_comida_a;
         } else {
-            switch (opcion) {
-                case "b":
-                    layoutId = R.layout.restaurante_a_comida_b;
-                    break;
-                case "c":
-                    layoutId = R.layout.restaurante_a_comida_c;
-                    break;
-                default:
-                    layoutId = R.layout.restaurante_a_comida_a;
-                    break;
-            }
+            layoutId = R.layout.restaurante_a_comida_a;
         }
 
         Intent intent = new Intent(requireContext(), ComidaDetalle.class);
         intent.putExtra("LAYOUT_ID", layoutId);
+        intent.putExtra("FOOD_ID", foodId);
         intent.putExtra("TITULO", titulo);
         startActivity(intent);
     }
