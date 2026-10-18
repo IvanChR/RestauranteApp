@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
-    android:background="#7f03fc"
-    app:title="@string/mainActivityTitle"
-    app:titleTextColor="#fff"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#7f03fc">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mainActivityTitle"
+            android:textColor="#fff"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/search_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:hint="Buscar..."
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColor="#fff"
+            android:textColorHint="#ccc"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/btn_search"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_lupa_search" />
+
+
+    </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

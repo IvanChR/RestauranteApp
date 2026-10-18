@@ -5,18 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <include
+        android:id="@+id/toolbarcomidadetallec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbarcomidadetallec"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
-        <include
-            android:id="@+id/toolbarcomidadetallec"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/toolbarcomidadetallec"
-            />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:textSize="18sp"
-                    android:text="@string/comida_c" />
+                    android:text="@string/restaurante_a_comida_c" />
 
             </LinearLayout>
         </LinearLayout>
@@ -75,6 +80,6 @@
                 android:text="@string/lorem_text" />
 
         </LinearLayout>
-
+    </LinearLayout>
     </LinearLayout>
 </ScrollView>

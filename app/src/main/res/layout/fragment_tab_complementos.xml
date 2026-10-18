@@ -8,27 +8,27 @@
     tools:context=".TabComplementos">
 
     <TextView
-        android:id="@+id/textViewComidaA"
+        android:id="@+id/textViewComplementoA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:text="@string/complemento_a"
+        android:text="@string/restaurante_a_complemento_a"
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/textViewComidaB"
+        android:id="@+id/textViewComplementoB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:text="@string/complemento_b"
+        android:text="@string/restaurante_a_complemento_b"
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/textViewComidaC"
+        android:id="@+id/textViewComplementoC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:text="@string/complemento_c"
+        android:text="@string/restaurante_a_complemento_c"
         android:textSize="24sp" />
 
 </LinearLayout>
